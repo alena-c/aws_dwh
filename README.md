@@ -7,6 +7,6 @@ First DWH implementation with Amazon Redshift
 
 
 
-<img src="https://www.neoadviser.com/wp-content/uploads/2019/05/power-bi.jpg" width="200">
+<img src="https://www.neoadviser.com/wp-content/uploads/2019/05/power-bi.jpg" width="400">
 
 
