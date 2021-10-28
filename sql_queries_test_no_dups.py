@@ -65,9 +65,7 @@ CREATE TABLE IF NOT EXISTS users(user_id    int      not null SORTKEY,
                                  first_name varchar, 
                                  last_name  varchar,
                                  gender     char(1), 
-                                 level      char(4) --,
-                                 --primary key(user_id)
-                                 )
+                                 level      char(4))
                                  diststyle all;
 """)
 
@@ -76,9 +74,7 @@ CREATE TABLE IF NOT EXISTS songs(song_id   varchar       not null SORTKEY DISTKE
                                  title     varchar(500)  not null,
                                  artist_id varchar       not null,
                                  year      int, 
-                                 duration  numeric(18,5) not null --,
-                                 --primary key(song_id)
-                                 );
+                                 duration  numeric(18,5) not null);
 """)
 
 artist_table_create = ("""
@@ -86,9 +82,7 @@ CREATE TABLE IF NOT EXISTS artists(artist_id varchar       not null SORTKEY,
                                    name      varchar(500),
                                    location  varchar(500),
                                    latitude  numeric(9,5), 
-                                   longitude numeric(9,5) --,
-                                   --primary key(artist_id)
-                                   )
+                                   longitude numeric(9,5))
                                    diststyle all;
 """)
 
@@ -99,9 +93,7 @@ CREATE TABLE IF NOT EXISTS time(start_time timestamp   not null SORTKEY,
                                 week int, 
                                 month int, 
                                 year int, 
-                                weekday varchar --,
-                                --primary key(start_time)
-                                )
+                                weekday varchar)
                                 diststyle all;
 """)
 
@@ -116,13 +108,7 @@ CREATE TABLE IF NOT EXISTS songplays(songplay_id int identity(0,1)  not null SOR
                                     artist_id   varchar,
                                     session_id  int,
                                     location    varchar,
-                                    user_agent  varchar --,
-                                   -- primary key(songplay_id),
-                                   -- foreign key(start_time) references time(start_time),
-                                    --foreign key(user_id)  references users(user_id),
-                                    --foreign key(song_id) references songs(song_id),
-                                   -- foreign key(artist_id) references artists(artist_id)
-                                   );
+                                    user_agent  varchar);
 """)
 
 
@@ -227,9 +213,8 @@ songplay_table_insert = ("""
                     se.useragent    as user_agent
     FROM staging_events se
     JOIN staging_songs ss
-    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) 
-    --ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) --> makes 6500 rows
-    ON (se.artist, se.song) = (ss.artist_name, ss.title) --> makes 6962 rows
+    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) --> makes 6500 rows
+    --ON (se.artist, se.song) = (ss.artist_name, ss.title) --> makes 6962 rows
     WHERE se.page = 'NextSong';
 """)
 
