@@ -3,8 +3,7 @@ import configparser
 
 # CONFIG
 config = configparser.ConfigParser()
-# config.read('dwh.cfg')
-config.read('dwh_cluster.cfg')      # TODO delete this and uncomment line 6 before committing 
+config.read('dwh_cluster.cfg')  #TODO remove before commiting
 
 DWH_ROLE_ARN = config.get("IAM_ROLE","ARN")
 LOG_DATA = config.get("S3","LOG_DATA")
@@ -25,7 +24,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # (should i make location, artist, and song 500 charater-long here as well?)
 staging_events_table_create= ("""
-CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1) not null,
+CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1),
                                           artist        varchar,
                                           auth          varchar,
                                           firstName     varchar,
@@ -38,22 +37,22 @@ CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1) no
                                           method        varchar(7),
                                           page          varchar,
                                           registration  numeric,
-                                          sessionId     int                  not null,
+                                          sessionId     int,
                                           song          varchar,
                                           status        int,
-                                          ts            bigint               not null,
+                                          ts            bigint,
                                           userAgent     varchar,
                                           userId        int);
 """)
 
 staging_songs_table_create = ("""
 CREATE TABLE IF NOT EXISTS staging_songs(num_songs        int,
-                                         artist_id        varchar        not null,
+                                         artist_id        varchar,
                                          artist_latitude  numeric(9,5),
                                          artist_longitude numeric(9,5),
                                          artist_location  varchar(500),
                                          artist_name      varchar(500),
-                                         song_id          varchar        not null,
+                                         song_id          varchar,
                                          title            varchar(500),
                                          duration         numeric(18,5),
                                          year             int);
@@ -123,7 +122,7 @@ format as json {};
 """).format(LOG_DATA, DWH_ROLE_ARN, LOG_JSONPATH)
 
 staging_songs_copy = ("""
-copy staging_songs from 's3://udacity-dend/song-data'
+copy staging_songs from 's3://udacity-dend/song_data'
 credentials 'aws_iam_role={}'
 format as json 'auto' region 'us-west-2'
 """).format(DWH_ROLE_ARN)
@@ -143,35 +142,24 @@ user_table_insert = ("""
                       gender,
                       level
     FROM staging_events
-    WHERE page = 'NextSong';
+    WHERE page = 'NextSong'
+      AND user_id is NOT NULL;
 """)
 
-# will make a table with duplicated values for song_id, title, artist_id and year where only duration differs
 song_table_insert = ("""
     INSERT INTO songs(song_id, 
                       title, 
                       artist_id, 
                       year, 
                       duration)
-    SELECT DISTINCT   song_id,
+    SELECT DISTINCT  (song_id),
                       title,
                       artist_id,
                       year,
                       duration
-    FROM staging_songs;
+    FROM staging_songs
+    WHERE song_id is NOT NULL;
 """)
-
-# --select count(*) from songs --> 384995
-# --SELECT DISTINCT song_id FROM songs --> 291272
-
-# -- if the following query returns 70790 rows, then how could table song contain 384995 rows?!
-# --SELECT DISTINCT   song_id,
-# --                  title,
-# --                  artist_id,
-# --                  year,
-# --                  duration
-# --FROM staging_songs;  -->70790, 70765 -- every time different number, why??
-
                                 
 artist_table_insert = ("""
     INSERT INTO artists(artist_id, 
@@ -179,17 +167,18 @@ artist_table_insert = ("""
                         location, 
                         latitude,
                         longitude)
-    SELECT DISTINCT     artist_id,
+    SELECT DISTINCT    (artist_id),
                         artist_name     as name,
                         artist_location as location,
                         artist_latitude as latitude,
                         artist_longitude as longitude
-    FROM staging_songs;
+    FROM staging_songs
+    WHERE artist_id is NOT NULL;
 """)
 
 time_table_insert = ("""
     INSERT INTO time(start_time, hour, day, week, month, year, weekday)
-    SELECT DISTINCT TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second' as start_time,
+    SELECT DISTINCT (TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second') as start_time,
                     EXTRACT(hour FROM start_time)    as hour,
                     EXTRACT(day FROM start_time)     as day,
                     EXTRACT(week FROM start_time)    as week,
