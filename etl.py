@@ -1,6 +1,6 @@
 import configparser
 import psycopg2
-from queries_test import copy_table_queries, insert_table_queries
+from sql_queries_test_no_dups import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
@@ -27,7 +27,8 @@ def main():
     that data into analytics tables on Redshift
     '''
     config = configparser.ConfigParser()
-    config.read('dwh.cfg')
+    config.read('dwh_cluster.cfg')      # TODO change back to dwh.cfg before committing 
+
 
     conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     cur = conn.cursor()
