@@ -4,6 +4,7 @@ import configparser
 # CONFIG
 config = configparser.ConfigParser()
 config.read('dwh.cfg')
+
 DWH_ROLE_ARN = config.get("IAM_ROLE","ARN")
 LOG_DATA = config.get("S3","LOG_DATA")
 SONG_DATA = config.get("S3","SONG_DATA")
@@ -23,7 +24,7 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # (should i make location, artist, and song 500 charater-long here as well?)
 staging_events_table_create= ("""
-CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1) not null,
+CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1),
                                           artist        varchar,
                                           auth          varchar,
                                           firstName     varchar,
@@ -36,22 +37,22 @@ CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1) no
                                           method        varchar(7),
                                           page          varchar,
                                           registration  numeric,
-                                          sessionId     int                  not null,
+                                          sessionId     int,
                                           song          varchar,
                                           status        int,
-                                          ts            bigint               not null,
+                                          ts            bigint,
                                           userAgent     varchar,
                                           userId        int);
 """)
 
 staging_songs_table_create = ("""
 CREATE TABLE IF NOT EXISTS staging_songs(num_songs        int,
-                                         artist_id        varchar        not null,
+                                         artist_id        varchar,
                                          artist_latitude  numeric(9,5),
                                          artist_longitude numeric(9,5),
                                          artist_location  varchar(500),
                                          artist_name      varchar(500),
-                                         song_id          varchar        not null,
+                                         song_id          varchar,
                                          title            varchar(500),
                                          duration         numeric(18,5),
                                          year             int);
@@ -63,9 +64,7 @@ CREATE TABLE IF NOT EXISTS users(user_id    int      not null SORTKEY,
                                  first_name varchar, 
                                  last_name  varchar,
                                  gender     char(1), 
-                                 level      char(4) --,
-                                 --primary key(user_id)
-                                 )
+                                 level      char(4))
                                  diststyle all;
 """)
 
@@ -74,9 +73,7 @@ CREATE TABLE IF NOT EXISTS songs(song_id   varchar       not null SORTKEY DISTKE
                                  title     varchar(500)  not null,
                                  artist_id varchar       not null,
                                  year      int, 
-                                 duration  numeric(18,5) not null --,
-                                 --primary key(song_id)
-                                 );
+                                 duration  numeric(18,5) not null);
 """)
 
 artist_table_create = ("""
@@ -84,9 +81,7 @@ CREATE TABLE IF NOT EXISTS artists(artist_id varchar       not null SORTKEY,
                                    name      varchar(500),
                                    location  varchar(500),
                                    latitude  numeric(9,5), 
-                                   longitude numeric(9,5) --,
-                                   --primary key(artist_id)
-                                   )
+                                   longitude numeric(9,5))
                                    diststyle all;
 """)
 
@@ -97,9 +92,7 @@ CREATE TABLE IF NOT EXISTS time(start_time timestamp   not null SORTKEY,
                                 week int, 
                                 month int, 
                                 year int, 
-                                weekday varchar --,
-                                --primary key(start_time)
-                                )
+                                weekday varchar)
                                 diststyle all;
 """)
 
@@ -114,13 +107,7 @@ CREATE TABLE IF NOT EXISTS songplays(songplay_id int identity(0,1)  not null SOR
                                     artist_id   varchar,
                                     session_id  int,
                                     location    varchar,
-                                    user_agent  varchar --,
-                                   -- primary key(songplay_id),
-                                   -- foreign key(start_time) references time(start_time),
-                                    --foreign key(user_id)  references users(user_id),
-                                    --foreign key(song_id) references songs(song_id),
-                                   -- foreign key(artist_id) references artists(artist_id)
-                                   );
+                                    user_agent  varchar);
 """)
 
 
@@ -135,13 +122,14 @@ format as json {};
 """).format(LOG_DATA, DWH_ROLE_ARN, LOG_JSONPATH)
 
 staging_songs_copy = ("""
-copy staging_songs from 's3://udacity-dend/song-data'
+copy staging_songs from 's3://udacity-dend/song_data'
 credentials 'aws_iam_role={}'
 format as json 'auto' region 'us-west-2'
 """).format(DWH_ROLE_ARN)
 
 # FINAL TABLES
 
+# will fill users with duplicate values for user_id, fname, lname, gender, where some level changes, but all privious level info is kept
 user_table_insert = ("""
     INSERT INTO users(user_id, 
                       first_name, 
@@ -155,7 +143,7 @@ user_table_insert = ("""
                       level
     FROM staging_events
     WHERE page = 'NextSong'
-        AND user_id NOT IN (SELECT DISTINCT user_id FROM users);
+      AND user_id is NOT NULL;
 """)
 
 song_table_insert = ("""
@@ -164,33 +152,34 @@ song_table_insert = ("""
                       artist_id, 
                       year, 
                       duration)
-    SELECT DISTINCT   song_id,
+    SELECT DISTINCT  (song_id),
                       title,
                       artist_id,
                       year,
                       duration
     FROM staging_songs
-    WHERE song_id NOT IN (SELECT DISTINCT song_id FROM songs);
+    WHERE song_id is NOT NULL;
 """)
-                                
+
+# returns  a table with dulicate artists ID's but different              
 artist_table_insert = ("""
     INSERT INTO artists(artist_id, 
                         name, 
                         location, 
                         latitude,
                         longitude)
-    SELECT DISTINCT     artist_id,
+    SELECT DISTINCT    (artist_id),
                         artist_name     as name,
                         artist_location as location,
                         artist_latitude as latitude,
                         artist_longitude as longitude
     FROM staging_songs
-    WHERE artist_id NOT IN (SELECT DISTINCT artist_id FROM artists);
+    WHERE artist_id is NOT NULL;
 """)
 
 time_table_insert = ("""
     INSERT INTO time(start_time, hour, day, week, month, year, weekday)
-    SELECT DISTINCT TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second' as start_time,
+    SELECT DISTINCT (TIMESTAMP 'epoch' + ts/1000 * INTERVAL '1 second') as start_time,
                     EXTRACT(hour FROM start_time)    as hour,
                     EXTRACT(day FROM start_time)     as day,
                     EXTRACT(week FROM start_time)    as week,
@@ -198,8 +187,7 @@ time_table_insert = ("""
                     EXTRACT(year FROM start_time)    as year,
                     to_char(start_time, 'Day')       as weekday
     FROM staging_events
-    WHERE page = 'NextSong' 
-        AND start_time NOT IN (SELECT DISTINCT start_time FROM time);
+    WHERE page = 'NextSong';
 """)
 
 songplay_table_insert = ("""
@@ -215,9 +203,9 @@ songplay_table_insert = ("""
                     se.useragent    as user_agent
     FROM staging_events se
     JOIN staging_songs ss
-    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) 
-    WHERE se.page = 'NextSong' 
-        AND start_time NOT IN (SELECT DISTINCT start_time FROM songplays);
+    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) --> makes 6500 rows
+    --ON (se.artist, se.song) = (ss.artist_name, ss.title) --> makes 6962 rows
+    WHERE se.page = 'NextSong';
 """)
 
 # QUERY LISTS
