@@ -1,12 +1,5 @@
-# aws_dwh
-First DWH implementation with Amazon Redshift 
-
-My dashboard
-
-[<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
-
 <h1>Data Engineering Nanodegree Program</h1>
-<h2>Project 1: Data Modeling with Postgres</h2>
+<h2>Project 3: Data Warehouse - DWH implementation with Amazon Redshift</h2>
 <h3>1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.</h3>
 
 * The database:
@@ -98,7 +91,9 @@ or
 10|San Jose-Sunnyvale-Santa Clara, CA | 24
 
 
+My dashboard
 
+[<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
 ___
 
 :bell: **Additional questions for the reviewer**
