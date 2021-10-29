@@ -11,7 +11,6 @@ SONG_DATA = config.get("S3","SONG_DATA")
 LOG_JSONPATH = config.get("S3","LOG_JSONPATH")
 
 # DROP TABLES
-
 staging_events_table_drop = "DROP TABLE IF EXISTS staging_events CASCADE"
 staging_songs_table_drop = "DROP TABLE IF EXISTS staging_songs CASCADE"
 songplay_table_drop = "DROP TABLE IF EXISTS songplays CASCADE"
@@ -21,8 +20,7 @@ artist_table_drop = "DROP TABLE IF EXISTS artists"
 time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
-
-# (should i make location, artist, and song 500 charater-long here as well?)
+# STAGING TABLES
 staging_events_table_create= ("""
 CREATE TABLE IF NOT EXISTS staging_events(event_id      bigint  IDENTITY(0,1),
                                           artist        varchar,
@@ -58,7 +56,7 @@ CREATE TABLE IF NOT EXISTS staging_songs(num_songs        int,
                                          year             int);
 """)
 
-# diststyle all because it's a small table --only 312 records
+# DIMENSION TABLES
 user_table_create = ("""
 CREATE TABLE IF NOT EXISTS users(user_id    int      not null SORTKEY,
                                  first_name varchar, 
@@ -96,8 +94,7 @@ CREATE TABLE IF NOT EXISTS time(start_time timestamp   not null SORTKEY,
                                 diststyle all;
 """)
 
-# Fact Table
-
+# FACT TABLE
 songplay_table_create = ("""
 CREATE TABLE IF NOT EXISTS songplays(songplay_id int identity(0,1)  not null SORTKEY,
                                     start_time  timestamp not null,
@@ -111,8 +108,7 @@ CREATE TABLE IF NOT EXISTS songplays(songplay_id int identity(0,1)  not null SOR
 """)
 
 
-# STAGING TABLES
-
+# POPULATE STAGING TABLES
 staging_events_copy = ("""
 copy staging_events from {}
 credentials 'aws_iam_role={}'
@@ -129,7 +125,7 @@ format as json 'auto' region 'us-west-2'
 
 # FINAL TABLES
 
-# will fill users with duplicate values for user_id, fname, lname, gender, where some level changes, but all privious level info is kept
+# The following query fills `users` table with duplicate values for some `user_id`'s since their subscription `level` changes (all privious level info is kept in the database).
 user_table_insert = ("""
     INSERT INTO users(user_id, 
                       first_name, 
@@ -160,8 +156,7 @@ song_table_insert = ("""
     FROM staging_songs
     WHERE song_id is NOT NULL;
 """)
-
-# returns  a table with dulicate artists ID's but different              
+            
 artist_table_insert = ("""
     INSERT INTO artists(artist_id, 
                         name, 
@@ -203,8 +198,7 @@ songplay_table_insert = ("""
                     se.useragent    as user_agent
     FROM staging_events se
     JOIN staging_songs ss
-    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration) --> makes 6500 rows
-    --ON (se.artist, se.song) = (ss.artist_name, ss.title) --> makes 6962 rows
+    ON (se.artist, se.song, se.length) = (ss.artist_name, ss.title, ss.duration)
     WHERE se.page = 'NextSong';
 """)
 
