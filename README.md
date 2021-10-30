@@ -8,7 +8,7 @@
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
 
-3. [Dashboard](#dashboard1)
+3. [ Dashboard ](#dashboard1)
 
 Do the following steps in your README.md file.
 
@@ -115,7 +115,6 @@ _If launching a cluster_:
 
 ***
 ### Dashboard <a name="dashboard1"></a>
-
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
 [<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
