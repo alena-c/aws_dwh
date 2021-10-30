@@ -1,5 +1,10 @@
 <h1>Data Engineering Nanodegree Program</h1>
 <h2>Project 3: Data Warehouse - DWH implementation with Amazon Redshift</h2>
+
+Contents:
+[Project description](link)
+[Schema design](link)
+
 <h3>1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.</h3>
 
 * nusic streaming app (Sparkify) -> grown user base and song database -> move their procceses and data to cloud:
@@ -106,55 +111,24 @@ Do the following steps in your README.md file.
 
 <h4>2.4 How To Run the Project</h4>
 
+__With existing cluster__:
 1. create_tables.py
 2. etl.py
 3. (optional checks) sql_queries.py
 
+__If launching a cluster__:
+1. create_cluster.py
+2. check_cluster_status.ipynb
+3. (optional) view_datasets.ipynb
+4. create_tables.py
+5. etl.py
+6. (optional checks) sql_queries.py
+7. (optional) test.ipynb
+8. delete_cluster.ipynb
+
+
 ***
-<h3>3. [Optional] Provide example queries and results for song play analysis.</h3>
-
-* For example, Sporkify wants to know the proportion of users that pay for their service as apposed to those with free accounts. This could be done by a simple query to the `users` table:
-    ```
-    SELECT level, 
-           count(*) / (SELECT count(*) FROM users)::float AS prcnt
-    FROM users
-    GROUP BY 1;
-    ```
-     Which produces the following output:
-       
-|_|level |prcnt |
-|--|--|--|
-1|free | 0.79167
-2|paid | 0.20833
-
-or
-
-* Sporkify wants to know the top 10 locations their most loyal users spent their weekends in Novermer 2018. This could be simply answered by joining songplays and time tables with the following query:
-   ```
-   SELECT location, count(*) 
-   FROM songplays s
-   INNER JOIN time t ON t.start_time = s.start_time
-   WHERE t.weekday in ('Saturday', 'Sunday') AND
-         s.start_time BETWEEN '2018-11-01' AND '2018-12-01' 
-   GROUP BY location
-   ORDER BY count(*) DESC
-   LIMIT 10;
-   ```
-   Which gives the following output:
-
-|_|location | count |
-|--|--|--|
-1|Atlanta-Sandy Springs-Roswell, GA | 146
-2|Tampa-St. Petersburg-Clearwater, FL |122
-3|San Francisco-Oakland-Hayward, CA | 117
-4|Winston-Salem, NC | 97
-5|Portland-South Portland, ME | 90
-6|Waterloo-Cedar Falls, IA | 90
-7|Sacramento--Roseville--Arden-Arcade, CA | 57
-8|Marinette, WI-MI | 31
-9|Chicago-Naperville-Elgin, IL-IN-WI | 30
-10|San Jose-Sunnyvale-Santa Clara, CA | 24
-
+<h3>3. [Optional] Dashboard for analytic queries.</h3>
 
 My dashboard
 
