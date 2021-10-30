@@ -68,12 +68,17 @@ log_data/2018/11/2018-11-13-events.json
 * : This section describes what files are for which purpose in the project 
 - [create_tables.py](./create_tables.py) to connect to the sparkify database???????????, creates the tables (or drop them and re-create new ones if existed). (un create_tables.py whenever you want to reset your database and test your ETL pipeline.) (connects to the Sparkify database, drops any tables if they exist, and creates the tables.)
 - [etl.py](./etl.py) loads data from Amazon S3 into staging tables and then process that data into the analytics tables on Amazon Redshift. (and complete the ETL process. ) (The script connects to the Sparkify redshift database, loads log_data and song_data into staging tables, and transforms them into the five tables.)
-- To test the table's content run [test.ipynb](./test.ipynb). delete!!
-- The sparkifydb DDL could be found in [sql_queries.py](./sql_queries.py). is where you'll define you SQL statements, which will be imported into the two other files above.
-- README.md is where you'll provide discussion on your process and decisions for this ETL pipeline.
-- (
-- Launch a redshift cluster and create an IAM role that has read access to S3.
-- Add redshift database and IAM role info to dwh.cfg.
+- [sql_queries.py](./sql_queries.py) creates database DDL, defines SQL statements, which will be imported into the two files above.
+- [dwh.cfg](./dwh.cfg) configuration file for the above three files. Redshift database and IAM role info should be added before running `create_tables.py`.
+- [README.md](./README.md) is where you'll provide discussion on your process and decisions for this ETL pipeline.
+
+Extra files:
+- [create_cluster.py](./create_cluster.py) launches Redshift cluster and all additional resources.
+- [dwh_start.cfg](./dwh_start.cfg) configuration file for `create_cluster.py`.
+- [check_cluster_status.ipynb](./check_cluster_status.ipynb) checks cluster's status and opens a TCP port.
+- [view_datasets.ipynb](./view_datasets.ipynb) shows datasets that reside on S3. 
+- [test.ipynb](./test.ipynb) queries sample data from the analytics tables.
+- [delete_cluster.ipynb](./delete_cluster.ipynb) clears all the resourses.
 
 * Project Steps
 
