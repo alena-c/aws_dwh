@@ -7,8 +7,8 @@
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
-3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-steps)
-3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#31-dashboard)
+3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-steps)<br>
+3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#31-dashboard)<br>
 3.2 [Query examples](https://github.com/alena-c/aws_dwh/blob/main/README.md#32-query-examples)
 
 ### 1. Summary
@@ -95,9 +95,32 @@ Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 *Note: For this dashboard, I used the larger dataset `song-data` also available on S3.
 
 #### 3.2 Query examples
-[Optional] Provide example queries and results for song play analysis
- -- DE will be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results. ?????????????? (move to questions)
 
+* Sporkify wants to know the top 10 songs which are most popular among their users on the weekends:
+   ```
+   SELECT s.title, count(*)
+   FROM songplays sp
+   JOIN songs s ON s.song_id = sp.song_id
+   JOIN time t ON sp.start_time = t.start_time
+   WHERE t.weekday in ('Saturday', 'Sunday')
+   GROUP BY s.title
+   ORDER BY 2 DESC
+   LIMIT 10;
+   ```
+   Which gives the following output:
+
+|_|title | count |
+|--|--|--|
+1|You're The One | 3
+2|Nothin' On You [feat. Bruno Mars] (Album Version) |2
+3|Caught Up In You | 2
+4|Up Up & Away | 2
+5|Catch You Baby (Steve Pitron & Max Sanna Radio Edit) | 2
+6|From The Ritz To The Rubble | 2
+7|Never Saw It Coming | 1
+8|Beautiful | 1
+9|Let's Get It Started | 1
+10|Yippiyo-Ay | 1
 ___
 
 :bell: **Additional questions for the reviewer**
@@ -112,3 +135,4 @@ I have used the links to the images here, and the headers, and the bullet points
 
 I would really appreciate if you comment on this questions! Thank you so much! 🙏🏻
 
+-- DE will be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results. ?????????????? (move to questions)
