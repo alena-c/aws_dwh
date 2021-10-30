@@ -1,7 +1,7 @@
 # Project 3: Data Warehouse - DWH implementation with Amazon Redshift
 
 ## Table of contents:
-1. [Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
+1. [Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-summary) <br>
 2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)<br>
 2.1 [Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis)<br>
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
@@ -115,7 +115,7 @@ _If launching a cluster_:
 
 
 ***
-### Dashboard <a name="dashboard1"></a>
+### 3. Dashboard <a name="dashboard1"></a>
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
 [<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
