@@ -84,7 +84,7 @@ _If launching a cluster_:
 
 
 ***
-### 3. Optional steps.
+### 3. Optional Steps
 #### 3.1 Dashboard
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
