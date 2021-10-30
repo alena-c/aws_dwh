@@ -7,7 +7,7 @@
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
-3. [Dashboard](#[Optional] Dashboard)
+3. [Dashboard](#Dashboard)
 
 Do the following steps in your README.md file.
 
@@ -113,7 +113,7 @@ _If launching a cluster_:
 
 
 ***
-### 3. [Optional] Dashboard
+### Dashboard
 
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
