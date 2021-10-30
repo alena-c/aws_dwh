@@ -6,6 +6,8 @@ from sql_queries import create_table_queries, drop_table_queries
 def drop_tables(cur, conn):
     """
     Drops each table using the queries in `drop_table_queries` list.
+    
+    Allows to reset the database and test the ETL pipeline.
     """
     for query in drop_table_queries:
         cur.execute(query)
