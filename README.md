@@ -1,17 +1,16 @@
-<h1>Data Engineering Nanodegree Program</h1>
-<h2>Project 3: Data Warehouse - DWH implementation with Amazon Redshift</h2>
+# Project 3: Data Warehouse 
+## (DWH implementation with Amazon Redshift)
 
-Contents:
-[1. Project Description](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals)
-[2. Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)
-[2.1 Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis-)
-[2.2 ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)
-[2.3 Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)
-[2.4 How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)
-[3. Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-dashboard-for-analytic-queries)
+## Table of contents:
+1. [Project Description](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
+2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)<br>
+2.1 [Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis-)<br>
+2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
+2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
+2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
+3. [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-dashboard-for-analytic-queries)
 
-
-<h3>1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.</h3>
+### 1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
 
 * nusic streaming app (Sparkify) -> grown user base and song database -> move their procceses and data to cloud:
  -- data resides in S3 (in a directory of JSON logs on app's user activity + JSON metadata on the app's songs.
@@ -51,9 +50,8 @@ log_data/2018/11/2018-11-13-events.json
 
 ***
 
-<h3>2. State and justify your db schema desing and ETL pileline</h3>
-
- <h4>2.1 Schema design (Schema for Song Play Analysis) </h4>
+### 2. State and justify your db schema desing and ETL pileline
+#### 2.1 Schema design (Schema for Song Play Analysis)
  
 * The following image is an ER diagram for the implemented **star schema**:
 ![Star Schema](images/star_schema.png)
@@ -68,13 +66,13 @@ log_data/2018/11/2018-11-13-events.json
     * In addition to it's **primary key** and the _foreign keys_ mentioned above, the fact table `songplays` also records the user's subscription level, location, session_id, and the user_agent information of user's system on which they played the song.
     * Such desing is perfect for the business problem. The denormalized tables allow for easy quering and fast aggregation of all needed information as well as help to perform easy joins. 
 
-<h4>2.2 ETL Pipeline.</h4>
+#### 2.2 ETL Pipeline
 
 * Initially, the song data ([data/song_data](./data/song_data)) is processed by iterating the directory's json files and making insertions about each new song into the `artists` and `songs` tables. This happens in etl.py process_song_file() function.
 * The log data ([data/log_data](./data/log_data)) is processed by iterating the directory's json files and making  the insertions of each log into the `users`, `time` tables, and, partially, into the `songplays` table (etl.py process_log_file() function).
 * Both data directories are extracting the data by creating, and populating Pandas dataframes, after what the insertions are made into the relevant tables by executing  cur.execute(`TABLE_NAME`_table_insert, row) command.
 
-<h4>2.3 Project Repository files</h4>
+#### 2.3 Project Repository files
 
 * : This section describes what files are for which purpose in the project 
 - [create_tables.py](./create_tables.py) to connect to the sparkify database???????????, creates the tables (or drop them and re-create new ones if existed). (un create_tables.py whenever you want to reset your database and test your ETL pipeline.) (connects to the Sparkify database, drops any tables if they exist, and creates the tables.)
@@ -115,14 +113,14 @@ Do the following steps in your README.md file.
     (The README file includes a summary of the project, how to run the Python scripts, and an explanation of the files in the repository. )
 
 
-<h4>2.4 How To Run the Project</h4>
+#### 2.4 How To Run the Project
 
-__With existing cluster__:
+_With existing cluster_:
 1. create_tables.py
 2. etl.py
 3. (optional checks) sql_queries.py
 
-__If launching a cluster__:
+_If launching a cluster_:
 1. create_cluster.py
 2. check_cluster_status.ipynb
 3. (optional) view_datasets.ipynb
@@ -134,11 +132,13 @@ __If launching a cluster__:
 
 
 ***
-<h3>3. [Optional] Dashboard for analytic queries.</h3>
+### 3. [Optional] Dashboard.
 
-My dashboard
+Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
 [<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
+
+*Note: For this dashboard, I used the larger dataset `song-data` also available on S3.
 ___
 
 :bell: **Additional questions for the reviewer**
