@@ -86,7 +86,7 @@ _If launching a cluster_:
 #### 3.1 Dashboard
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
-[<img src="images/power_bi.png" width="600">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
+[<img src="images/power_bi.png" width="1000">](https://app.powerbi.com/view?r=eyJrIjoiZjM5NTlmNzMtNjEyYy00YzgyLTk0YjgtNWFiOTJmZDVjZDc0IiwidCI6IjAyZDljYjNmLTFmZDMtNDQyMS05YjVkLTYwY2MxMzNhNTg3YSIsImMiOjJ9)
 
 *Note: For this dashboard, I used the larger dataset `song-data` also available on S3.
 
