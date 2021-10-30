@@ -8,7 +8,7 @@
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
 3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-steps)
-3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-dashboard-)
+3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#31-dashboard)
 3.2 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-dashboard-)
 
 ### 1. Summary
