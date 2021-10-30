@@ -114,7 +114,7 @@ _If launching a cluster_:
 
 
 ***
-### <a name="dashboard"></a> Dashboard <div id='dashboard'/>
+### Dashboard <div id='dashboard'/>
 
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
