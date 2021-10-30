@@ -9,7 +9,7 @@
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
 3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-steps)
 3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#31-dashboard)
-3.2 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-dashboard-)
+3.2 [Query examples](https://github.com/alena-c/aws_dwh/blob/main/README.md#32-query-examples)
 
 ### 1. Summary
 The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
