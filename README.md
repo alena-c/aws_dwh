@@ -1,14 +1,19 @@
-# Project 3: Data Warehouse 
-## (DWH implementation with Amazon Redshift)
+# Project 3: Data Warehouse - DWH implementation with Amazon Redshift
 
 ## Table of contents:
-1. [Project Description](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
+1. [Project Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
 2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)<br>
 2.1 [Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis-)<br>
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
 3. [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-dashboard-for-analytic-queries)
+
+Do the following steps in your README.md file.
+
+    Discuss the purpose of this database in context of the startup, Sparkify, and their analytical goals.
+    State and justify your database schema design and ETL pipeline.
+    [Optional] Provide example queries and results for song play analysis
 
 ### 1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
 
@@ -72,46 +77,22 @@ log_data/2018/11/2018-11-13-events.json
 * The log data ([data/log_data](./data/log_data)) is processed by iterating the directory's json files and making  the insertions of each log into the `users`, `time` tables, and, partially, into the `songplays` table (etl.py process_log_file() function).
 * Both data directories are extracting the data by creating, and populating Pandas dataframes, after what the insertions are made into the relevant tables by executing  cur.execute(`TABLE_NAME`_table_insert, row) command.
 
-#### 2.3 Project Repository files
+#### 2.3 Project Repository Files
 
 * : This section describes what files are for which purpose in the project 
-- [create_tables.py](./create_tables.py) to connect to the sparkify database???????????, creates the tables (or drop them and re-create new ones if existed). (un create_tables.py whenever you want to reset your database and test your ETL pipeline.) (connects to the Sparkify database, drops any tables if they exist, and creates the tables.)
+- [create_tables.py](./create_tables.py) connects to the redshift database, creates the tables (or drop them and re-create new ones if existed). Allows to reset the database and test ETL pipeline. (You can use Query Editor in the AWS Redshift console for testing if this worked).
 - [etl.py](./etl.py) loads data from Amazon S3 into staging tables and then process that data into the analytics tables on Amazon Redshift. (and complete the ETL process. ) (The script connects to the Sparkify redshift database, loads log_data and song_data into staging tables, and transforms them into the five tables.)
 - [sql_queries.py](./sql_queries.py) creates database DDL, defines SQL statements, which will be imported into the two files above.
 - [dwh.cfg](./dwh.cfg) configuration file for the above three files. Redshift database and IAM role info should be added before running `create_tables.py`.
 - [README.md](./README.md) is where you'll provide discussion on your process and decisions for this ETL pipeline.
 
 Extra files:
-- [create_cluster.py](./create_cluster.py) launches Redshift cluster and all additional resources.
+- [create_cluster.py](./create_cluster.py) launches a Redshift cluster and creates an IAM role that has read access to S3.
 - [dwh_start.cfg](./dwh_start.cfg) configuration file for `create_cluster.py`.
 - [check_cluster_status.ipynb](./check_cluster_status.ipynb) checks cluster's status and opens a TCP port.
 - [view_datasets.ipynb](./view_datasets.ipynb) shows datasets that reside on S3. 
-- [test.ipynb](./test.ipynb) queries sample data from the analytics tables.
-- [delete_cluster.ipynb](./delete_cluster.ipynb) clears all the resourses.
-
-* Project Steps
-
-Below are steps you can follow to complete each component of this project.
-Create Table Schemas
-
-    1. Design schemas for your fact and dimension tables
-    2. Write a SQL CREATE statement for each of these tables in sql_queries.py
-    3. Complete the logic in create_tables.py to connect to the database and create these tables
-    4. Write SQL DROP statements to drop tables in the beginning of create_tables.py if the tables already exist. This way, you can run create_tables.py whenever you want to reset your database and test your ETL pipeline.
-    5. Launch a redshift cluster and create an IAM role that has read access to S3.
-    6. Add redshift database and IAM role info to dwh.cfg.
-    7. Test by running create_tables.py and checking the table schemas in your redshift database. You can use Query Editor in the AWS Redshift console for this.
-    8. Delete your redshift cluster when finished.
-
-* Document Process
-
-Do the following steps in your README.md file.
-
-    Discuss the purpose of this database in context of the startup, Sparkify, and their analytical goals.
-    State and justify your database schema design and ETL pipeline.
-    [Optional] Provide example queries and results for song play analysis.
-    (The README file includes a summary of the project, how to run the Python scripts, and an explanation of the files in the repository. )
-
+- [test.ipynb](./test.ipynb) queries sample data from the analytics tables. 
+- [delete_cluster.ipynb](./delete_cluster.ipynb) deletes the Redshift cluster when finished.
 
 #### 2.4 How To Run the Project
 
