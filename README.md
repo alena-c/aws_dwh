@@ -7,7 +7,7 @@
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
-3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-steps)<br>
+3. [Optional Steps](https://github.com/alena-c/aws_dwh/blob/main/README.md#3-extra-steps)<br>
 3.1 [Dashboard](https://github.com/alena-c/aws_dwh/blob/main/README.md#31-dashboard)<br>
 3.2 [Query examples](https://github.com/alena-c/aws_dwh/blob/main/README.md#32-query-examples)
 
@@ -82,7 +82,7 @@ _If launching a cluster_:
 
 
 ***
-### 3. Optional Steps
+### 3. Extra Steps
 #### 3.1 Dashboard
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
