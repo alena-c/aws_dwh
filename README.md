@@ -19,7 +19,7 @@ Do the following steps in your README.md file.
 
 The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
 
-* nusic streaming app (Sparkify) -> grown user base and song database -> move their procceses and data to cloud:
+* music streaming app (Sparkify) -> grown user base and song database -> move their procceses and data to cloud:
  -- data resides in S3 (in a directory of JSON logs on app's user activity + JSON metadata on the app's songs.
  -- task for DE: build an ETL pipeline that extracts thier data from S3, stages it in Redshift, and transforms data into a set of dimensional tables for their analytics team to continue finding insights in what songs their users are listening to.
  -- DE will be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results. ?????????????? (move to questions)
