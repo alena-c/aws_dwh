@@ -1,7 +1,7 @@
 # Project 3: Data Warehouse - DWH implementation with Amazon Redshift
 
 ## Table of contents:
-1. [Project Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
+1. [Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-the-purpose-of-the-database-in-the-context-of-srartup-sparkify-and-their-analytical-goals) <br>
 2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)<br>
 2.1 [Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis)<br>
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
@@ -15,7 +15,9 @@ Do the following steps in your README.md file.
     State and justify your database schema design and ETL pipeline.
     [Optional] Provide example queries and results for song play analysis
 
-### 1. The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
+### 1. Summary
+
+The purpose of the database in the context of srartup, Sparkify, and their analytical goals.
 
 * nusic streaming app (Sparkify) -> grown user base and song database -> move their procceses and data to cloud:
  -- data resides in S3 (in a directory of JSON logs on app's user activity + JSON metadata on the app's songs.
