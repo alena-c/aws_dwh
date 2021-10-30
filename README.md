@@ -2,7 +2,7 @@
 
 ## Table of contents:
 1. [Summary](https://github.com/alena-c/aws_dwh/blob/main/README.md#1-summary) <br>
-2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-desing-and-etl-pileline)<br>
+2. [Shema and ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#2-state-and-justify-your-db-schema-design-and-etl-pileline)<br>
 2.1 [Schema design](https://github.com/alena-c/aws_dwh/blob/main/README.md#21-schema-design-schema-for-song-play-analysis)<br>
 2.2 [ETL Pipeline](https://github.com/alena-c/aws_dwh/blob/main/README.md#22-etl-pipeline)<br>
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
@@ -49,15 +49,16 @@ song_data/A/A/B/TRAABJL12903CDCF1A.json
 log_data/2018/11/2018-11-12-events.json
 log_data/2018/11/2018-11-13-events.json
 ```
-(this jupyter notebook file --> will allow to view the structure of the files)
 
 * The database:
     * Was created for the analysis of the Sparkify music streaming data logs on songs and user activity.
-    * Since the analytics team is interested in the users' music choises, this database helps to perform such analysis. This relational database is a perfect solution for ease of quering the data as apposed to getting the data from the files stored in JSON logs.
+    * After Sparkify's users base and song database have grown in scale (and keeps growing), the decision to move their procceses and data to cloud sounds like a wise one - the previous single relational database might no longer be enough. 
+    * Also, since the analytics team is interested in the users' music choises, a database stored in a data warehouse would seem like a more appropriate architecture for performing such analytics and reports from the business perspective. 
+    * Similarly, data warehouse is specifically structured for analitics. I's perfect for retrieving data from various sourses into a dimensional data store which further improves analytical query perfomance. Amazon Redshift is a convinient and optimal solution for previously listed purposes.
 
 ***
 
-### 2. State and justify your db schema desing and ETL pileline
+### 2. State and justify your db schema design and ETL pileline
 #### 2.1 Schema design (Schema for Song Play Analysis)
  
 * The following image is an ER diagram for the implemented **star schema**:
