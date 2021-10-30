@@ -121,18 +121,4 @@ Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 8|Beautiful | 1
 9|Let's Get It Started | 1
 10|Yippiyo-Ay | 1
-___
 
-:bell: **Additional questions for the reviewer**
-
-1) You said I could create an ER diagram. But I did create it before and included it into this readme file. Is it not good enough because it doesn't have information on what the primary keys are (bold font) and other additional information? 
-2) You wrote "I would suggest using proper headings, emphasis, underline the relevant keywords. Use bullet points, add link URLs and images to make the README better." 
-I have used the links to the images here, and the headers, and the bullet points. I guess I don't quite understand how this file is supposed to look like to pass your proper format standards. Is it possible to see some example of a perfectly formatted readme file? 
-3) A question regarding the template file etl.py. Are we supposed to change its code completely so it's not considered a plagiarism? Or it is not expected for this project?
-4) What kinds of data checks are you asking for in this projects as an extra to make this project to stand out?
-5) What kind of dashboard are you taking about? Do you simply want an extra ipynb file with visualizations or do you actually want us to integrate some kind of BI tool (like Tableau) into this project? Would it be possible to get a link with examples please?
-6) When you talk about the bulk insert of data, do you mean the direct insert from json file -> to postgres tables? Or do you mean converting JSON to CSV first and then use \copy? I've studied the link you shared with me earlier, but i'm still a little bit confused which method I should use here.
-
-I would really appreciate if you comment on this questions! Thank you so much! 🙏🏻
-
--- DE will be able to test your database and ETL pipeline by running queries given to you by the analytics team from Sparkify and compare your results with their expected results. ?????????????? (move to questions)
