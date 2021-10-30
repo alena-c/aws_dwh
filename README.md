@@ -8,7 +8,7 @@
 2.3 [Project Repository Files](https://github.com/alena-c/aws_dwh/blob/main/README.md#23-project-repository-files)<br>
 2.4 [How to Run the Project](https://github.com/alena-c/aws_dwh/blob/main/README.md#24-how-to-run-the-project)<br>
 
-3. [Dashboard](#https://github.com/alena-c/aws_dwh/blob/main/README.md#3-optional-dashboard)
+3. [Dashboard](#dashboard)
 
 Do the following steps in your README.md file.
 
