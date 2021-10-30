@@ -21,11 +21,7 @@ The purpose of the database in the context of srartup, Sparkify, and their analy
     * Similarly, data warehouse is specifically structured for analitics. I's perfect for retrieving data from various sourses into a dimensional data store which further improves analytical query perfomance. The Sparkify's datasets already reside in Amazon S3, thus Amazon Redshift-hosted database is a convinient, and optimal solution for all previously listed purposes.
 
 ***
-
-* Project Description:
- -- Apply what you've learned on data warehouses and AWS to build an ETL pipeline for a database hosted on Redshift. To complete the project, you'll need to load data from S3 to staging tables on Redshift and execute SQL statements that create the analytics tables from these staging tables.
  
-
 ### 2. State and justify your db schema design and ETL pileline
 #### 2.1 Schema design (Schema for Song Play Analysis)
   
