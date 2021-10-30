@@ -113,7 +113,7 @@ _If launching a cluster_:
 
 
 ***
-### Dashboard <a name="dashboard"></a>
+### <a name="dashboard"></a> Dashboard 
 
 Here is my dashboard for analytic queries (made with Microsoft Power BI)*:
 
